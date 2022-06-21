@@ -1,9 +1,9 @@
-import HelloWorld from '../components/hello-world'
+import Pomodoro from "../components/Pomodoro";
 
 export default function Home() {
-  return (
-    <div className="app">
-      <HelloWorld />
-    </div>
-  )
+	return (
+		<div className="app">
+			<Pomodoro />
+		</div>
+	);
 }

@@ -1,0 +1,22 @@
+.container {
+	width: 644px;
+	display: flex;
+	margin: 20px 0 20px 0;
+	padding: 20px;
+	justify-content: space-between;
+	border-bottom: 1px solid #c34c48;
+}
+
+.icon {
+	font-size: 24px;
+	margin-right: 5px;
+}
+
+.setting {
+	display: flex;
+	align-items: center;
+	background-color: #dd6662;
+	padding: 0 10px;
+	border-radius: 10px;
+	cursor: pointer;
+}

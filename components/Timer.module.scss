@@ -1,0 +1,37 @@
+.container {
+	width: 480px;
+	background-color: #dd6662;
+	border-radius: 10px;
+	margin-top: 25px;
+	padding: 25px 5px;
+}
+
+.flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.timerGroupButtons button {
+	background-color: transparent;
+	border: none;
+	color: white;
+	padding: 0 10px;
+	letter-spacing: 1px;
+	cursor: pointer;
+}
+.timerValue p {
+	font-size: 120px;
+}
+
+.startButton button {
+	background-color: white;
+	padding: 10px 50px;
+	border: none;
+	border-radius: 10px;
+	color: #d95550;
+	letter-spacing: 1px;
+	font-weight: bold;
+	font-size: 20px;
+	cursor: pointer;
+}
