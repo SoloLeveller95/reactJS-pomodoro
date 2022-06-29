@@ -15,12 +15,30 @@
 .timerGroupButtons button {
 	background-color: transparent;
 	border: none;
+	border-radius: 5px;
 	color: white;
 	padding: 0 10px;
 	letter-spacing: 1px;
 	cursor: pointer;
 }
-.timerValue p {
+
+// .timerGroupButtons button:nth-child(1) {
+// 	&:focus {
+// 		background-color: #bc5753;
+// 	}
+// }
+// .timerGroupButtons button:nth-child(2) {
+// 	&:focus {
+// 		background-color: #508588;
+// 	}
+// }
+// .timerGroupButtons button:nth-child(3) {
+// 	&:focus {
+// 		background-color: #4b7592;
+// 	}
+// }
+
+.timerValue h1 {
 	font-size: 120px;
 }
 
@@ -29,9 +47,11 @@
 	padding: 10px 50px;
 	border: none;
 	border-radius: 10px;
-	color: #d95550;
 	letter-spacing: 1px;
 	font-weight: bold;
 	font-size: 20px;
 	cursor: pointer;
+	// &:focus {
+	// 	box-shadow: rgb(235 235 235) 0px 6px 0px;
+	// }
 }

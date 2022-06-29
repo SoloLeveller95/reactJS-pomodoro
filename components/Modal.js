@@ -1,13 +1,15 @@
 import styles from "./Modal.module.scss";
 import { FaTimes } from "react-icons/fa";
+import { useTheme } from "../hooks/useTheme";
 
 const Modal = () => {
+	const { changeModal } = useTheme();
 	return (
 		<div className={styles.modalBackground}>
 			<div className={styles.modalContainer}>
 				<div className={styles.modalUpper}>
 					<p>TIMER SETTING</p>
-					<button>
+					<button onClick={() => changeModal(false)}>
 						<FaTimes />
 					</button>
 				</div>
