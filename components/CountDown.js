@@ -1,38 +1,64 @@
 import { useTheme } from "../hooks/useTheme";
 import Timer from "react-compound-timer";
 import styles from "./CountDown.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CountDown = () => {
-	const { changeColor, otherComponentColor, timerValue, changeValue } =
-		useTheme();
+	const {
+		changeColor,
+		otherComponentColor,
+		pomodoroValue,
+		shortbrekValue,
+		longbreakValue,
+	} = useTheme();
+	// const audioElement = new Audio();
+	// const [audio] = useState(
+	// 	typeof Audio !== "undefined" && new Audio("/sound.wav")
+	// );
+	// audio.play();
+	// console.log(audio);
+	// audio.play();
+
 	const [isActive1, setIsActive1] = useState(true);
 	const [isActive2, setIsActive2] = useState(false);
 	const [isActive3, setIsActive3] = useState(false);
 	const [timerStart, setTimerStart] = useState(false);
 	const [timerPause, setTimerPause] = useState(false);
-	const [timeValue, settimeValue] = useState(parseInt("25"));
+	const [audio, setAudio] = useState(null);
+	const [audio2, setAudio2] = useState(null);
+	const [initialTime, setinitialTime] = useState(pomodoroValue);
+
+	useEffect(() => {
+		setinitialTime(pomodoroValue);
+		setAudio(new Audio("/sound5.wav"));
+		setAudio2(new Audio("/sound4.wav"));
+	}, [pomodoroValue, shortbrekValue, longbreakValue]);
 
 	const handleClick1 = () => {
 		setIsActive1(true);
 		setIsActive2(false);
 		setIsActive3(false);
+		setinitialTime(pomodoroValue);
+		setTimerStart(false);
+		setTimerPause(false);
 	};
 	const handleClick2 = () => {
 		setIsActive1(false);
 		setIsActive2(true);
 		setIsActive3(false);
-		settimeValue(15);
+		setinitialTime(shortbrekValue);
+		setTimerStart(false);
+		setTimerPause(false);
 	};
 	const handleClick3 = () => {
 		setIsActive1(false);
 		setIsActive2(false);
 		setIsActive3(true);
-		settimeValue(25);
+		setinitialTime(longbreakValue);
+		setTimerStart(false);
+		setTimerPause(false);
 	};
-	console.log(timeValue);
 
-	// const values = 100;
 	return (
 		<div
 			className={styles.container}
@@ -80,16 +106,22 @@ const CountDown = () => {
 				</button>
 			</div>
 			<div className={`${styles.flex} ${styles.timerValue}`}>
-				<h1>
+				<div key={initialTime}>
 					<Timer
-						initialTime={timeValue * 60000}
+						initialTime={initialTime * 60000}
 						lastUnit="m"
 						direction="backward"
 						startImmediately={false}
+						checkpoints={[
+							{
+								time: 0,
+								callback: () => audio.play(),
+							},
+						]}
 					>
 						{({ start, resume, pause, stop, reset }) => (
 							<>
-								<div>
+								<h1>
 									<Timer.Minutes
 										formatValue={(value) =>
 											`${value < 10 ? `0${value}` : value}`
@@ -101,7 +133,7 @@ const CountDown = () => {
 											`${value < 10 ? `0${value}` : value}`
 										}
 									/>
-								</div>
+								</h1>
 
 								<div className={`${styles.flex} ${styles.startButton}`}>
 									<button
@@ -109,6 +141,7 @@ const CountDown = () => {
 											start();
 											setTimerStart(true);
 											setTimerPause(false);
+											audio2.play();
 										}}
 										style={
 											timerStart
@@ -133,6 +166,7 @@ const CountDown = () => {
 											pause();
 											setTimerStart(false);
 											setTimerPause(true);
+											audio2.play();
 										}}
 										style={
 											timerPause
@@ -154,7 +188,7 @@ const CountDown = () => {
 							</>
 						)}
 					</Timer>
-				</h1>
+				</div>
 			</div>
 		</div>
 	);

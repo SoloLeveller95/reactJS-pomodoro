@@ -12,8 +12,12 @@ const themeReducer = (state, action) => {
 			};
 		case "CHANGE_MODAL":
 			return { ...state, modalStatus: action.payload };
-		case "CHANGE_VALUE":
-			return { ...state, timerValue: action.payload };
+		case "CHANGE_POMODOROVALUE":
+			return { ...state, pomodoroValue: action.payload };
+		case "CHANGE_SHORTVALUE":
+			return { ...state, shortbrekValue: action.payload };
+		case "CHANGE_LONGVALUE":
+			return { ...state, longbreakValue: action.payload };
 		default:
 			return state;
 	}
@@ -24,7 +28,9 @@ export function ThemeProvider({ children }) {
 		color: "#D95550",
 		otherComponentColor: "#DD6662",
 		modalStatus: false,
-		timerValue: 25,
+		pomodoroValue: 25,
+		shortbrekValue: 5,
+		longbreakValue: 15,
 	});
 
 	const changeColor = (color, otherComponentColor) => {
@@ -40,13 +46,26 @@ export function ThemeProvider({ children }) {
 		dispatch({ type: "CHANGE_MODAL", payload: modalStatus });
 	};
 
-	const changeValue = (timerValue) => {
-		dispatch({ type: "CHANGE_VALUE", payload: timerValue });
+	const changePomodoroValue = (pomodoroValue) => {
+		dispatch({ type: "CHANGE_POMODOROVALUE", payload: pomodoroValue });
+	};
+	const changeShortBreakValue = (shortbrekValue) => {
+		dispatch({ type: "CHANGE_SHORTVALUE", payload: shortbrekValue });
+	};
+	const changeLongBreakValue = (longbreakValue) => {
+		dispatch({ type: "CHANGE_LONGVALUE", payload: longbreakValue });
 	};
 
 	return (
 		<ThemeContext.Provider
-			value={{ ...state, changeColor, changeModal, changeValue }}
+			value={{
+				...state,
+				changeColor,
+				changeModal,
+				changePomodoroValue,
+				changeShortBreakValue,
+				changeLongBreakValue,
+			}}
 		>
 			{children}
 		</ThemeContext.Provider>

@@ -4,10 +4,15 @@ import { useTheme } from "../hooks/useTheme";
 import { useState } from "react";
 
 const Modal = () => {
-	const [pomodoroValue, setPomodoroValue] = useState("");
-	const [shortbrekValue, setShortbrekValue] = useState("");
-	const [longbreakValue, setlongbreakValue] = useState("");
-	const { changeModal, changeValue } = useTheme();
+	const [pomodoroValue, setPomodoroValue] = useState("25");
+	const [shortbrekValue, setShortbrekValue] = useState("5");
+	const [longbreakValue, setlongbreakValue] = useState("15");
+	const {
+		changeModal,
+		changePomodoroValue,
+		changeShortBreakValue,
+		changeLongBreakValue,
+	} = useTheme();
 	console.log(pomodoroValue);
 	console.log(shortbrekValue);
 	console.log(longbreakValue);
@@ -15,6 +20,9 @@ const Modal = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		changeModal(false);
+		changePomodoroValue(pomodoroValue);
+		changeShortBreakValue(shortbrekValue);
+		changeLongBreakValue(longbreakValue);
 	};
 	return (
 		<form onSubmit={handleSubmit} className={styles.modalBackground}>
