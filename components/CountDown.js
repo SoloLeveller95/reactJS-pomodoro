@@ -4,12 +4,14 @@ import styles from "./CountDown.module.scss";
 import { useState } from "react";
 
 const CountDown = () => {
-	const { changeColor, otherComponentColor } = useTheme();
+	const { changeColor, otherComponentColor, timerValue, changeValue } =
+		useTheme();
 	const [isActive1, setIsActive1] = useState(true);
 	const [isActive2, setIsActive2] = useState(false);
 	const [isActive3, setIsActive3] = useState(false);
 	const [timerStart, setTimerStart] = useState(false);
 	const [timerPause, setTimerPause] = useState(false);
+	const [timeValue, settimeValue] = useState(parseInt("25"));
 
 	const handleClick1 = () => {
 		setIsActive1(true);
@@ -20,15 +22,17 @@ const CountDown = () => {
 		setIsActive1(false);
 		setIsActive2(true);
 		setIsActive3(false);
+		settimeValue(15);
 	};
 	const handleClick3 = () => {
 		setIsActive1(false);
 		setIsActive2(false);
 		setIsActive3(true);
+		settimeValue(25);
 	};
-	console.log(timerStart);
+	console.log(timeValue);
 
-	const values = 1;
+	// const values = 100;
 	return (
 		<div
 			className={styles.container}
@@ -78,7 +82,7 @@ const CountDown = () => {
 			<div className={`${styles.flex} ${styles.timerValue}`}>
 				<h1>
 					<Timer
-						initialTime={values * 600000}
+						initialTime={timeValue * 60000}
 						lastUnit="m"
 						direction="backward"
 						startImmediately={false}
