@@ -1,7 +1,7 @@
 import { useTheme } from "../hooks/useTheme";
 import Timer from "react-compound-timer";
 import styles from "./CountDown.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const CountDown = () => {
 	const {
@@ -27,6 +27,7 @@ const CountDown = () => {
 	const [audio, setAudio] = useState(null);
 	const [audio2, setAudio2] = useState(null);
 	const [initialTime, setinitialTime] = useState(pomodoroValue);
+	const buttonClickedRef = useRef();
 
 	useEffect(() => {
 		setinitialTime(pomodoroValue);
@@ -79,6 +80,7 @@ const CountDown = () => {
 					Pomodoro
 				</button>
 				<button
+					ref={buttonClickedRef}
 					onClick={() => {
 						changeColor("#4C9195", "#5E9CA0");
 						handleClick2();
@@ -115,7 +117,10 @@ const CountDown = () => {
 						checkpoints={[
 							{
 								time: 0,
-								callback: () => audio.play(),
+								callback: () => {
+									audio.play();
+									buttonClickedRef.current.click();
+								},
 							},
 						]}
 					>
